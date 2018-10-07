@@ -29,19 +29,22 @@
 
 
   function reset(){
+    setTimeout(function(){
     database.ref("/player1").set({
-      player1Choice: ""
+      player1Choice: "",
+      player1Text: ""
     });
     database.ref("/player2").set({
-      player2Choice: ""
+      player2Choice: "",
+      player2Text: ""
     });
-    setTimeout(function(){
+    
     $("#player1Text").text("Select one:");
     $("#player2Text").text("Select one:");
     $("#resultText").text("")}, 3000)
   };
 
-  
+
   function compare(){
     if (player1Choice === "rock" && player2Choice === "rock") {
       $("#resultText").text("TIE!")
@@ -80,9 +83,10 @@
     $(this).attr("data-status", "selected")
     let player1Selected = $(this).attr("data-value");
     database.ref("/player1").set({
-      player1Choice: player1Selected
+      player1Choice: player1Selected,
+      player1Text: "Player 1 has selected"
     });
-    $("#player1Text").text("Player 1 has selected")
+    // $("#player1Text").text("Player 1 has selected")
 
     $(".player1").not(this).each(function(){
       $(this).attr("data-status", "notSelected")
@@ -93,9 +97,10 @@
     $(this).attr("data-status", "selected")
     let player2Selected = $(this).attr("data-value");
     database.ref("/player2").set({
-      player2Choice: player2Selected
+      player2Choice: player2Selected,
+      player2Text: "Player 2 has selected"
     });
-    $("#player2Text").text("Player 2 has selected")
+    // $("#player2Text").text("Player 2 has selected")
 
     $(".player2").not(this).each(function(){
       $(this).attr("data-status", "notSelected")
@@ -104,12 +109,14 @@
 
   database.ref("/player1").on("value", function(snapshot){
     player1Choice = snapshot.val().player1Choice;
+    $("#player1Text").text(snapshot.val().player1Text);
     compare();
     
   });
 
   database.ref("/player2").on("value", function(snapshot){
     player2Choice = snapshot.val().player2Choice;
+    $("#player2Text").text(snapshot.val().player2Text)
     compare();
     
   });
