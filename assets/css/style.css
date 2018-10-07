@@ -12,3 +12,7 @@ img {
     border: solid #5c6ecf 5px;
     border-radius: 5px;
 }
+
+#win-loss {
+    margin-top: 20px;
+}

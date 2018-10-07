@@ -13,23 +13,9 @@
   var player1Choice;
   var player2Choice;
 
-
   
 
   function resetOnReload(){
-    database.ref("/player1").set({
-      player1Choice: ""
-    });
-    database.ref("/player2").set({
-      player2Choice: ""
-    });
-    $("#player1Text").text("Select one:");
-    $("#player2Text").text("Select one:");
-  };
-
-
-  function reset(){
-    setTimeout(function(){
     database.ref("/player1").set({
       player1Choice: "",
       player1Text: ""
@@ -38,40 +24,77 @@
       player2Choice: "",
       player2Text: ""
     });
-    
     $("#player1Text").text("Select one:");
     $("#player2Text").text("Select one:");
-    $("#resultText").text("")}, 3000)
+  };
+
+  function changeColor(){
+    $('[data-value="'+ player1Choice+'"]').addClass("selectedBorder");
+    $('[data-value="'+ player2Choice+'"]').addClass("selectedBorder");
+    
+  }
+
+
+  function reset(){
+    setTimeout(function(){
+      $('[data-value="'+ player1Choice+'"]').removeClass("selectedBorder");
+      $('[data-value="'+ player2Choice+'"]').removeClass("selectedBorder");
+    }, 3000)
+
+    setTimeout(function(){
+      database.ref("/player1").set({
+        player1Choice: "",
+        player1Text: ""
+      });
+      database.ref("/player2").set({
+        player2Choice: "",
+        player2Text: ""
+      });
+    // $('[data-status="selected"]').removeClass("selectedBorder");
+      $("#player1Text").text("Select one:");
+      $("#player2Text").text("Select one:");
+      $("#resultText").text("")
+    }, 3500)
   };
 
 
   function compare(){
-    if (player1Choice === "rock" && player2Choice === "rock") {
+    if (player1Choice === "rock1" && player2Choice === "rock2") {
       $("#resultText").text("TIE!")
+      changeColor();
+      // $('[data-status="selected"]').addClass("selectedBorder");
       reset();
-    } else if (player1Choice === "paper" && player2Choice === "paper") {
+    } else if (player1Choice === "paper1" && player2Choice === "paper2") {
       $("#resultText").text("TIE!")
+      changeColor();
       reset();
-    } else if (player1Choice === "scissors" && player2Choice === "scissors") {
+    } else if (player1Choice === "scissors1" && player2Choice === "scissors2") {
       $("#resultText").text("TIE!")
+      changeColor();
       reset();
-    } else if (player1Choice === "scissors" && player2Choice === "rock") {
+    } else if (player1Choice === "scissors1" && player2Choice === "rock2") {
       $("#resultText").text("Player 2 Wins!")
+      changeColor();
       reset();
-    } else if (player1Choice === "scissors" && player2Choice === "paper") {
+    } else if (player1Choice === "scissors1" && player2Choice === "paper2") {
       $("#resultText").text("Player 1 Wins!")
+      changeColor();
       reset();
-    } else if (player1Choice === "rock" && player2Choice === "paper") {
+    } else if (player1Choice === "rock1" && player2Choice === "paper2") {
       $("#resultText").text("Player 2 Wins!")
+      changeColor();
       reset();
-    } else if (player1Choice === "rock" && player2Choice === "scissors") {
+    } else if (player1Choice === "rock1" && player2Choice === "scissors2") {
       $("#resultText").text("Player 1 Wins!")
+      changeColor();
       reset();
-    } else if (player1Choice === "paper" && player2Choice === "rock") {
+    } else if (player1Choice === "paper1" && player2Choice === "rock2") {
       $("#resultText").text("Player 1 Wins!")
+      changeColor();
       reset();
-    } else if (player1Choice === "paper" && player2Choice === "scissors") {
+    } else if (player1Choice === "paper1" && player2Choice === "scissors2") {
       $("#resultText").text("Player 2 Wins!")
+      changeColor();
       reset();
     };
   };
@@ -86,7 +109,6 @@
       player1Choice: player1Selected,
       player1Text: "Player 1 has selected"
     });
-    // $("#player1Text").text("Player 1 has selected")
 
     $(".player1").not(this).each(function(){
       $(this).attr("data-status", "notSelected")
@@ -100,7 +122,6 @@
       player2Choice: player2Selected,
       player2Text: "Player 2 has selected"
     });
-    // $("#player2Text").text("Player 2 has selected")
 
     $(".player2").not(this).each(function(){
       $(this).attr("data-status", "notSelected")
