@@ -15,13 +15,13 @@
 
         <div class="row">
             <div class="col m12 center-align">
-                <h1 class="blue-text text-darken-4">Rock Paper Scissors</h1>
+                <h2 class="blue-text text-darken-4">Rock Paper Scissors</h2>
             </div>
         </div>
 
         <div class="row">
 
-            <div class="col m4 center-align">
+            <div class="col m3 center-align">
                 <h3 class="deep-purple-text">Player 1</h3>
                 <h5 id="player1Text" class="deep-purple-text">Select one:</h5>
                 <img data-value="rock1" class="imgBorder player1" src="assets/images/rock.jpg" alt="rock">
@@ -29,7 +29,7 @@
                 <img data-value="scissors1" class="imgBorder player1" src="assets/images/scissors.JPG" alt="scissors">
             </div>
 
-            <div class="col m4 center-align">
+            <div class="col m3 center-align">
 
                 <div class="row">
                     <div class="col m12">
@@ -57,12 +57,33 @@
                 
             </div>
 
-            <div class="col m4 center-align">
+            <div class="col m3 center-align">
                 <h3 class="teal-text">Player 2</h3>
                 <h5 id="player2Text" class="teal-text">Select one:</h5>
                 <img data-value="rock2" class="imgBorder player2" src="assets/images/rock.jpg" alt="rock">
                 <img data-value="paper2" class="imgBorder player2" src="assets/images/paper.jpg" alt="paper">
                 <img data-value="scissors2" class="imgBorder player2" src="assets/images/scissors.JPG" alt="scissors">
+            </div>
+
+            <div class="col m3">
+                <h3 class="blue-text text-darken-4 center-align">Chat:</h3>
+                <div id="chatBox" class="white">
+
+                </div>
+
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="chat" type="text" placeholder="Say Hello!">
+                            </div>
+                        </div>
+                    </form>
+                    <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <!-- <i class="material-icons right">send</i> -->
+                    </button>
+                </div>
+                
             </div>
 
         </div>

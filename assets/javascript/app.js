@@ -16,6 +16,7 @@
   var player1Losses;
   var player2Wins;
   var player2Losses;
+  var text;
 
   
   //resets DOM and database on page reload
@@ -34,12 +35,17 @@
       player2Wins: 0,
       player2Losses: 0
     });
+    database.ref("/chat").set({
+      text: ""
+    });
+
     $("#player1Text").text("Select one:");
     $("#player2Text").text("Select one:");
     $("#player1Wins").text(player1Wins);
     $("#player1Losses").text(player1Losses);
     $("#player2Wins").text(player2Wins);
     $("#player2Losses").text(player2Losses);
+    $("#chatBox").empty();
   };
 
   //changes wins and losses in database
@@ -180,6 +186,21 @@
     $("#player2Losses").text(player2Losses);
   }, function(errorObject) {
     console.log("The read failed: " + errorObject.code);
+  });
+
+  //adds text to database when submit button is clicked
+  $(document.body).on("click", "#submit", function(){
+    text = $("#chat").val().trim();
+    database.ref("/chat").set({
+      text: text
+    })
+    $("#chat").val("");
+  });
+
+  //appends the text to the page when it is added to the database
+  database.ref("/chat").on("value", function(snapshot){
+    text = snapshot.val().text;
+    $("#chatBox").append("<p>" + text + "</p>");
   });
 
   //resets page on reload
